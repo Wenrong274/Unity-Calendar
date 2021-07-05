@@ -7,9 +7,9 @@ namespace hyhy.Common
 {
     public class UnityCalendar : MonoBehaviour
     {
-        [SerializeField] private Dropdown dropdownYear;
-        [SerializeField] private Dropdown dropdownMonth;
-        [SerializeField] private Dropdown dropdownDay;
+        [SerializeField] private ExpandedDropdown dropdownYear;
+        [SerializeField] private ExpandedDropdown dropdownMonth;
+        [SerializeField] private ExpandedDropdown dropdownDay;
         private List<int> yearGroup = new List<int>();
         private List<int> monthGroup = new List<int>();
         private List<int> dayGroup = new List<int>();
@@ -25,6 +25,18 @@ namespace hyhy.Common
         private void Awake()
         {
             CurDateNow = DateTime.Now;
+            dropdownYear.onValueChanged.AddListener(SetYear);
+            dropdownMonth.onValueChanged.AddListener(SetMonth);
+            dropdownDay.onValueChanged.AddListener(SetDay);
+
+            Init();
+        }
+        public void Init()
+        {
+            curYear = curMonth = curDay = -1;
+            dropdownYear.value = 0;
+            dropdownMonth.value = 0;
+            dropdownDay.value = 0;
             UpdateYear();
         }
 
@@ -96,7 +108,7 @@ namespace hyhy.Common
             int curDate = dropdownMonth.value;
             List<string> op = new List<string>();
             monthGroup = new List<int>();
-            op.Add("選擇");
+            op.Add("Select");
             dropdownMonth.ClearOptions();
 
             while (true)
@@ -132,7 +144,7 @@ namespace hyhy.Common
 
             List<string> op = new List<string>();
             dayGroup = new List<int>();
-            op.Add("選擇");
+            op.Add("Select");
             dropdownDay.ClearOptions();
 
             while (true)
