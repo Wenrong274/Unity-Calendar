@@ -69,7 +69,7 @@ namespace hyhy.Common
             List<string> op = new List<string>();
             int curDate = dropdownMonth.value;
             yearGroup = new List<int>();
-            op.Add("選擇");
+            op.Add("Select");
             dropdownYear.ClearOptions();
             for (int i = curYear; i >= 1900; i--)
             {
